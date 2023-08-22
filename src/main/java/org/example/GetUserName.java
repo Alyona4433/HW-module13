@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import com.alibaba.fastjson.JSONObject;
 
-public class JsonPlaceholderApiClient {
+public class GetUserName {
     public static void main(String[] args) throws IOException, InterruptedException {
         String url = "https://jsonplaceholder.typicode.com/users";
 
