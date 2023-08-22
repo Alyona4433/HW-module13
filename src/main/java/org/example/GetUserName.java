@@ -1,12 +1,13 @@
 package org.example;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 public class JsonPlaceholderApiClient {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -25,12 +26,13 @@ public class JsonPlaceholderApiClient {
 
         System.out.println("response.statusCode() = " + response.statusCode());
 
-        JSONArray jsonArray = new JSONArray(response.body());
+        JSONArray jsonArray = JSON.parseArray(response.body());
+
 
         String targetUsername = "username_to_search"; //Вводимо ім'я usera
 
 
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject user = jsonArray.getJSONObject(i);
             String username = user.getString("username");
 

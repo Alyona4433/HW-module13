@@ -1,6 +1,9 @@
 package org.example;
 
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -29,7 +32,7 @@ public class DelObject {
         JSONArray jsonArray = new JSONArray(getResponse.body());
 
 
-        if (jsonArray.length() > 0) {
+        if (0 < jsonArray.get()) {
             JSONObject firstUser = jsonArray.getJSONObject(0);
             String firstUserId = firstUser.getString("id");
 

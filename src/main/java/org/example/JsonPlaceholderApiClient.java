@@ -1,15 +1,14 @@
-
 package org.example;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 
 public class JsonPlaceholderApiClient<jsonArray> {
@@ -39,18 +38,13 @@ public class JsonPlaceholderApiClient<jsonArray> {
 
     private HttpResponse<Object> response;
     JSONArray jsonArray = new JSONArray(response.body());
-     public <jsonArray> void OpenTasks(jsonArray) {
-
-    }
-
-}
 
     public static void openTasks(JSONArray tasksArray) {
-        for (int i = 0; i < tasksArray.get(); i++) {
+        for (int i = 0; i < tasksArray.length(); i++) {
             JSONObject task = tasksArray.getJSONObject(i);
             boolean completed = task.getBoolean("completed");
             if (!completed) {
-                int taskId = task.getInteger("id");
+                int taskId = task.getInt("id");
                 String title = task.getString("title");
 
                 System.out.println("Task ID: " + taskId);

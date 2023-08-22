@@ -1,13 +1,14 @@
 package org.example;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class Comments {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -27,6 +28,8 @@ public class Comments {
         System.out.println("response.statusCode() = " + response.statusCode());
 
         JSONArray jsonArray = new JSONArray(response.body());
+
+
 
         if (jsonArray.length() > 0) {
             JSONObject lastPost = jsonArray.getJSONObject(jsonArray.length() - 1);
