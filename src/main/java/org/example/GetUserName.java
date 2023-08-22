@@ -37,7 +37,7 @@ public class JsonPlaceholderApiClient {
             String username = user.getString("username");
 
             if (username.equals(targetUsername)) {
-                int userId = user.getInt("id");
+                Integer userId = user.getInteger("id");
                 String userUrl = url + "/" + userId;
 
                 HttpRequest userRequest = HttpRequest.newBuilder()

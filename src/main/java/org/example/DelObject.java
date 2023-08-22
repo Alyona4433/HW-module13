@@ -1,6 +1,5 @@
 package org.example;
 
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -14,7 +13,7 @@ public class DelObject {
     public static void main(String[] args) throws IOException, InterruptedException {
         String url = "https://jsonplaceholder.typicode.com/users";
 
-        // Відправити Get request
+        //GET
         HttpRequest getRequest = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
@@ -28,15 +27,14 @@ public class DelObject {
 
         System.out.println("GET response.statusCode() = " + getResponse.statusCode());
 
-        // JSON response
-        JSONArray jsonArray = new JSONArray(getResponse.body());
+        //response
+        JSONArray jsonArray = JSONArray.parseArray(getResponse.body());
 
-
-        if (0 < jsonArray.get()) {
+        if (jsonArray.size() > 0) {
             JSONObject firstUser = jsonArray.getJSONObject(0);
             String firstUserId = firstUser.getString("id");
 
-            // Відправити DELETE request для видалення юзера
+            // DELETE
             String deleteUrl = url + "/" + firstUserId;
             HttpRequest deleteRequest = HttpRequest.newBuilder()
                     .uri(URI.create(deleteUrl))

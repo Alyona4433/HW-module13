@@ -10,8 +10,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-
-public class JsonPlaceholderApiClient<jsonArray> {
+public class JsonPlaceholderApiClient {
     public static void main(String[] args) throws IOException, InterruptedException {
         String url = "https://jsonplaceholder.typicode.com/users";
 
@@ -28,23 +27,21 @@ public class JsonPlaceholderApiClient<jsonArray> {
 
         System.out.println("response.statusCode() = " + response.statusCode());
 
-
         FileWriter fw;
         fw = new FileWriter("body.html");
         fw.write(response.body());
         fw.close();
 
+        JSONArray jsonArray = JSONArray.parseArray(response.body());
+        openTasks(jsonArray);
     }
 
-    private HttpResponse<Object> response;
-    JSONArray jsonArray = new JSONArray(response.body());
-
     public static void openTasks(JSONArray tasksArray) {
-        for (int i = 0; i < tasksArray.length(); i++) {
+        for (int i = 0; i < tasksArray.size(); i++) {
             JSONObject task = tasksArray.getJSONObject(i);
             boolean completed = task.getBoolean("completed");
             if (!completed) {
-                int taskId = task.getInt("id");
+                int taskId = task.getIntValue("id");
                 String title = task.getString("title");
 
                 System.out.println("Task ID: " + taskId);

@@ -1,5 +1,6 @@
 package org.example;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -33,11 +34,12 @@ public class Users {
         fw.close();
 
 
-        JSONArray jsonArray = new JSONArray(response.body());
+        JSONArray jsonArray = JSON.parseArray(response.body());
 
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.size(); i++) {
+
             JSONObject user = jsonArray.getJSONObject(i);
-            System.out.println("User ID: " + user.getInt("id"));
+            System.out.println("User ID: " + user.getInteger("id"));
             System.out.println("Name: " + user.getString("name"));
             System.out.println("Username: " + user.getString("username"));
             System.out.println("Email: " + user.getString("email"));
